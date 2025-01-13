@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const initialNewPost = {
 
@@ -28,6 +29,7 @@ export default function AddPost() {
     const tagsAPI = "http://localhost:3000/tags";
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const { setAlertData } = useGlobalContext();
 
     function getData() {
         axios.get(postsAPI).then((res) => {
@@ -44,6 +46,7 @@ export default function AddPost() {
     useEffect(() => {
 
         getTags()
+        getData();
 
     }, [])
 
@@ -63,21 +66,26 @@ export default function AddPost() {
     function handleSubmit(event) {
         event.preventDefault();
         setIsLoading(true);
+
         const published = document.getElementById("published");
         !published.checked
             ? (alert("Cliccare su `Pubblica` per pubblicare il post"), setIsLoading(false))
 
-            : axios.post(postsAPI, newPost).then(() => {
+            : axios.post(postsAPI, newPost).then((res) => {
                 setNewPost(initialNewPost);
                 setIsLoading(false);
+                const id = res.data.id;
+                setAlertData({
+                    type: "success",
+                    message: `Il post con id: ${id} è stata salvata`,
+                });
+                getData();
                 navigate("/posts");
             }).catch((err) => {
                 console.log(err)
             }).finally(() => {
                 setIsLoading(false);
             })
-
-
 
     }
     function handleTags(event) {
@@ -93,11 +101,7 @@ export default function AddPost() {
             }
         })
     }
-    const handlePublish = () => {
-        event.target.checked &&
-            alert('Stai per pubblicare un post!');
-        handleInput(event);
-    };
+
 
     return (
 
@@ -187,7 +191,7 @@ export default function AddPost() {
                                 id="published"
                                 name="published"
                                 onChange={
-                                    handlePublish
+                                    handleInput
                                 }
                                 checked={newPost.published}
                                 value={newPost.published}

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useGlobalContext } from "../context/GlobalContext";
+import { useGlobalContext, GlobalProvider } from "../context/GlobalContext";
 
 const postsAPI = "http://localhost:3000/posts";
 const tagsAPI = "http://localhost:3000/tags"
@@ -25,16 +25,16 @@ function Main() {
 
     }, [])
 
-    function getData() {
-        axios.get(postsAPI).then((res) => {
-            console.log(res.data)
-            setMyPosts(res.data.data)
-            console.log(res.data.data)
-        })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
+    // function getData() {
+    //     axios.get(postsAPI).then((res) => {
+    //         console.log(res.data)
+    //         setMyPosts(res.data.data)
+    //         console.log(res.data.data)
+    //     })
+    //         .catch((error) => {
+    //             console.log(error)
+    //         })
+    // }
     function getTags() {
         axios.get(tagsAPI).then((res) => {
             console.log(res.data)
@@ -44,7 +44,8 @@ function Main() {
 
     //DELETE
     function deleteItem(id) {
-        axios.delete(postsAPI + "/" + id).then(() => getData());
+
+        axios.delete(postsAPI + "/" + id).then(postsList);
 
     }
 
@@ -81,10 +82,6 @@ function Main() {
             }
         })
     }
-    // const handlePublish = () => {
-    //     alert('Stai per pubblicare un post!');
-    //     handleInput(event);
-    // };
 
 
     return (
