@@ -14,9 +14,9 @@ const tagsAPI = "http://localhost:3000/tags"
 
 function Main() {
     const [myPosts, setMyPosts] = useState([]);
-    const [postList, setPostList] = useState([]);
     const [filteredTags, setFilteredTags] = useState([]);
-    const { postsList } = useGlobalContext();
+    const { postsList, getPosts } = useGlobalContext();
+    const { setAlertData } = useGlobalContext();
     // ***** FUNCTIONS *****
     //GET DATA
     useEffect(() => {
@@ -43,9 +43,17 @@ function Main() {
     }
 
     //DELETE
-    function deleteItem(id) {
+    function deleteItem(id, title) {
 
-        axios.delete(postsAPI + "/" + id).then(postsList);
+        axios.delete(postsAPI + "/" + id).then((res) => {
+
+            getPosts();
+
+            setAlertData({
+                type: "success",
+                message: `Il post "${title}" è stato eliminato con successo!`,
+            });
+        });
 
     }
 
@@ -118,7 +126,7 @@ function Main() {
                                     key={post.id}
                                     tags={post.tags}
                                     id={post.id}
-                                    onDelete={() => deleteItem(post.id)}
+                                    onDelete={() => deleteItem(post.id, post.title)}
                                 />
                             )
                         })}

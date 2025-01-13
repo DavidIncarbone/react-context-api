@@ -14,8 +14,6 @@ const GlobalProvider = ({ children }) => {
     const [postsList, setPostsList] = useState([]);
     const initialData = { type: "", message: "" };
     const [alertData, setAlertData] = useState(initialData);
-
-
     // FUNCTIONS
 
     useEffect(() => {
@@ -40,7 +38,7 @@ const GlobalProvider = ({ children }) => {
     }
 
     return (
-        <GlobalContext.Provider value={{ alertData, setAlertData, postsList }}>
+        <GlobalContext.Provider value={{ alertData, setAlertData, postsList, getPosts }}>
             {children}
         </GlobalContext.Provider>
     );

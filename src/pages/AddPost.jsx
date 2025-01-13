@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { useGlobalContext } from "../context/GlobalContext";
 
+
 const initialNewPost = {
 
     title: "",
@@ -19,7 +20,8 @@ const initialNewPost = {
 
 const options = ["Cinema", "Calcio", "Viaggi"];
 const postsAPI = "http://localhost:3000/posts";
-const tagsAPI = "http://localhost:3000/tags"
+const tagsAPI = "http://localhost:3000/tags";
+
 
 
 export default function AddPost() {
@@ -30,6 +32,7 @@ export default function AddPost() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const { setAlertData } = useGlobalContext();
+    const { postsList, getPosts } = useGlobalContext();
 
     function getData() {
         axios.get(postsAPI).then((res) => {
@@ -46,7 +49,7 @@ export default function AddPost() {
     useEffect(() => {
 
         getTags()
-        getData();
+        // getData();
 
     }, [])
 
@@ -72,14 +75,16 @@ export default function AddPost() {
             ? (alert("Cliccare su `Pubblica` per pubblicare il post"), setIsLoading(false))
 
             : axios.post(postsAPI, newPost).then((res) => {
+                getPosts();
                 setNewPost(initialNewPost);
                 setIsLoading(false);
-                const id = res.data.id;
+                const title = res.data.title;
                 setAlertData({
                     type: "success",
-                    message: `Il post con id: ${id} è stata salvata`,
+                    message: `Il post "${title}" è stato creato con successo!`,
                 });
-                getData();
+
+
                 navigate("/posts");
             }).catch((err) => {
                 console.log(err)
