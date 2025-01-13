@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const infoPostAPI = "http://localhost:3000/posts/"
 
 export default function PostInfo() {
@@ -26,19 +27,22 @@ export default function PostInfo() {
     }
     console.log(post)
     return (
-
-        <div id="container" className="container pb-5">
-            <h2 className="text-center py-1 text-bg-danger">{post.title}</h2>
-            <h5 className="text-center">Descrizione</h5>
-            <div id="info-img-container" className="w-25 me-3">
-                <img id="info-post" src={post.image} alt={post.title} />
+        <>
+            <div id="container" className="container pb-5">
+                <h2 className="text-center py-1 text-bg-danger">{post.title}</h2>
+                <h5 className="text-center">Descrizione</h5>
+                <div id="info-img-container" className="w-25 me-3">
+                    <img id="info-post" src={post.image} alt={post.title} />
+                </div>
+                <div >
+                    <p>{post.content}
+                    </p>
+                </div>
             </div>
-            <div >
-                <p>{post.content}
-                </p>
+            <div className="d-flex justify-content-center pb-3">
+                <Link to={"/posts"} className="btn btn-danger">Torna alla lista dei posts</Link>
             </div>
-        </div>
-
+        </>
     )
 }
 

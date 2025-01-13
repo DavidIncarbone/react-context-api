@@ -95,23 +95,31 @@ function Main() {
     return (
         <main>
 
-            {/* <div className="w-25 ms-5">
-                <h2 className="ps-1">Lista dei Tags</h2>
-                <ul className="text-bg-dark">
-                    {
-                        filteredTags.map((tag, index) => {
-                            return (
-                                <li key={`card-tag-${index}xxx`}>{tag}</li>
+
+
+            <div className="d-flex justify-content-between align-items-center px-3 pb-3">
+                <form className="d-flex h-25  w-25">
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <button className="btn btn-outline-success" type="button">Search</button>
+                </form>
+
+                <Link to={"/posts/create"} className="btn btn-warning h-25 ms-5">Crea Nuovo Post</Link>
+                <div className="w-25 ms-5 align-self-end ">
+                    <h2 className="ps-1">Lista dei Tags</h2>
+                    <ul className="text-bg-dark">
+                        {
+                            filteredTags.map((tag, index) => {
+                                return (
+                                    <li key={`card-tag-${index}xxx`}>{tag}</li>
+                                )
+                            }
                             )
                         }
-                        )
-                    }
-                </ul>
-            </div > */}
-
-            <div className="d-flex justify-content-center py-3">
-                <Link to={"/posts/create"} className="btn btn-warning">Crea Nuovo Post</Link>
+                    </ul>
+                </div >
             </div>
+
+
 
 
             <div className="container d-flex">
@@ -125,6 +133,7 @@ function Main() {
                                     image={post.image}
                                     key={post.id}
                                     tags={post.tags}
+                                    category={post.category}
                                     id={post.id}
                                     onDelete={() => deleteItem(post.id, post.title)}
                                 />

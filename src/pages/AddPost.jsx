@@ -166,15 +166,8 @@ export default function AddPost() {
                                         className="form-check-input tag-checkbox"
                                         id="avaiable"
                                         name="available"
-
-                                        onChange={() => {
-                                            handleTags
-                                        }}
+                                        onChange={handleTags}
                                         value={tag}
-
-
-
-
                                     />
                                     <label className="form-check-label" htmlFor="avaiable">
                                         {tag}
