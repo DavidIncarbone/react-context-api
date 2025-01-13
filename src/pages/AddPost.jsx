@@ -34,22 +34,11 @@ export default function AddPost() {
     const { setAlertData } = useGlobalContext();
     const { postsList, getPosts } = useGlobalContext();
 
-    function getData() {
-        axios.get(postsAPI).then((res) => {
-            console.log(res.data)
-            setMyPosts(res.data.data)
-            console.log(res.data.data)
-        })
-            .catch((error) => {
-                console.log(error);
-
-            })
-    }
 
     useEffect(() => {
 
         getTags()
-        // getData();
+
 
     }, [])
 
@@ -177,8 +166,14 @@ export default function AddPost() {
                                         className="form-check-input tag-checkbox"
                                         id="avaiable"
                                         name="available"
-                                        onChange={handleTags}
+
+                                        onChange={() => {
+                                            handleTags
+                                        }}
                                         value={tag}
+
+
+
 
                                     />
                                     <label className="form-check-label" htmlFor="avaiable">
