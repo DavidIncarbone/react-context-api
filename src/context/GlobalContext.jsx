@@ -6,7 +6,7 @@ import axios from "axios";
 // VARIABLES
 
 const GlobalContext = createContext();
-const apiUrl = "http://localhost:3000/";
+const apiUrl = "http://localhost:3000";
 
 const GlobalProvider = ({ children }) => {
 

@@ -1,20 +1,26 @@
+// IMPORT
+
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const postsAPI = "http://localhost:3000/posts";
 const tagsAPI = "http://localhost:3000/tags"
+
+// FUNCTIONS
 
 
 function Main() {
     const [myPosts, setMyPosts] = useState([]);
     const [postList, setPostList] = useState([]);
     const [filteredTags, setFilteredTags] = useState([]);
+    const { postsList } = useGlobalContext();
     // ***** FUNCTIONS *****
     //GET DATA
     useEffect(() => {
-        getData();
+        // getData();
         getTags()
 
     }, [])
@@ -75,10 +81,10 @@ function Main() {
             }
         })
     }
-    const handlePublish = () => {
-        alert('Stai per pubblicare un post!');
-        handleInput(event);
-    };
+    // const handlePublish = () => {
+    //     alert('Stai per pubblicare un post!');
+    //     handleInput(event);
+    // };
 
 
     return (
@@ -106,7 +112,7 @@ function Main() {
             <div className="container d-flex">
 
                 <ul className="d-flex flex-wrap gap-5">
-                    {myPosts.filter((post) => post.published)
+                    {postsList.filter((post) => post.published)
                         .map((post) => {
                             return (
                                 <Card title={post.title}

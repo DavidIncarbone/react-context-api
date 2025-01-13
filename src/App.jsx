@@ -1,3 +1,5 @@
+// IMPORT
+import './App.css'
 import DefaultLayout from "./pages/DefaultLayout";
 import Main from "./pages/Main";
 import Home from "./pages/Home";
@@ -6,12 +8,14 @@ import PostInfo from "./pages/PostInfo";
 import AddPost from "./pages/AddPost";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Error from "./pages/Error";
-import './App.css'
-function App() {
+import { GlobalProvider } from "./context/GlobalContext";
 
-  // const myPosts = posts
+
+
+
+function App() {
   return (
-    <>
+    <GlobalProvider>
       <BrowserRouter>
         <Routes>
           <Route element={<DefaultLayout />}>
@@ -27,9 +31,9 @@ function App() {
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
+    </GlobalProvider>
 
 
-    </>
   )
 }
 
