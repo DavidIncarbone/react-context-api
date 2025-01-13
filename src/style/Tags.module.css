@@ -1,0 +1,22 @@
+.green {
+    color: green;
+}
+
+.pink {
+
+    color: pink;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.red {
+    color: red;
+}
+
+span {
+    padding: 5px;
+
+    border-radius: 5px;
+}

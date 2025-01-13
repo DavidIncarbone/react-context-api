@@ -1,0 +1,13 @@
+.btn {
+    background-color: red;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    text-decoration: none;
+    margin-right: 5px;
+
+}
+
+.isActive {
+    border: 1px solid red;
+}
