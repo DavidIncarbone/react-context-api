@@ -105,7 +105,7 @@ function Main() {
 
                 <Link to={"/posts/create"} className="btn btn-warning h-25 ms-5">Crea Nuovo Post</Link>
                 <div className="w-25 ms-5 align-self-end ">
-                    <h2 className="ps-1">Lista dei Tags</h2>
+                    <h2 className="ps-1 text-center">Lista dei Tags</h2>
                     <ul className="text-bg-dark">
                         {
                             filteredTags.map((tag, index) => {

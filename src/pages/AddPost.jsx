@@ -25,7 +25,7 @@ const tagsAPI = "http://localhost:3000/tags";
 
 
 export default function AddPost() {
-    const [myPosts, setMyPosts] = useState([]);
+
     const [newPost, setNewPost] = useState(initialNewPost);
     const [filteredTags, setFilteredTags] = useState([]);
     const tagsAPI = "http://localhost:3000/tags";
@@ -83,6 +83,7 @@ export default function AddPost() {
 
     }
     function handleTags(event) {
+
         setNewPost((newPost) => {
             let { tags, ...others } = newPost;
             if (tags.includes(event.target.value)) {
@@ -160,16 +161,9 @@ export default function AddPost() {
                     <div className="border border-2 p-1">
                         {filteredTags.map((tag) => {
                             return (
-                                <div key={crypto.randomUUID()} className="mb-3 form-check " >
-                                    <input
-                                        type="checkbox"
-                                        className="form-check-input tag-checkbox"
-                                        id="avaiable"
-                                        name="available"
-                                        onChange={handleTags}
-                                        value={tag}
-                                    />
-                                    <label className="form-check-label" htmlFor="avaiable">
+                                <div key={tag} className="form-check">
+                                    <input className="form-check-input" type="checkbox" value={tag} id="tag" onChange={handleTags} />
+                                    <label className="form-check-label" htmlFor="tag">
                                         {tag}
                                     </label>
                                 </div>
